@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 
 class AircraftsData(models.Model):
     aircraft_code = models.CharField(primary_key=True, max_length=3)
