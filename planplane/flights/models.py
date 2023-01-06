@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib import admin
+import json
 
 class AircraftsData(models.Model):
     aircraft_code = models.CharField(primary_key=True, max_length=3)
@@ -9,6 +9,9 @@ class AircraftsData(models.Model):
     class Meta:
         managed = False
         db_table = 'aircrafts_data'
+
+    def __str__(self):
+        return self.model.get('en')
 
 
 class AirportsData(models.Model):

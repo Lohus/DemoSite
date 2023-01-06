@@ -1,0 +1,8 @@
+<form action="{% url 'flights:airports' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Аэропорты города</h1></legend>
+            <input type="text" name="choice">
+    </fieldset>
+    <input type="submit" value="Search">
+</form>

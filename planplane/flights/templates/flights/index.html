@@ -1,0 +1,12 @@
+<a href="{% url 'flights:airports' %}">Аэропорты</a>
+
+{% if temp %}
+    <ul>
+    {% for plane in temp %}
+    {{ plane }}
+        <li><a href="{% url 'flights:code' plane.aircraft_code %}">{{ plane.model.en }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет кодов???</p>
+{% endif %}
