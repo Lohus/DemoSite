@@ -14,7 +14,10 @@ def model_aircrafts(request, code_model):
     return HttpResponse("Aircrafts code: %s." % code_model)
 
 def airports_of_city(request):
-    temp = AirportsData.objects.all()
-    context = {'AirportsData': temp}
+    if request.POST:
+        temp = AirportsData.objects.filter(city__en=request.POST['namecity'])
+        context = {'AirportsData': temp}
+    else:
+        context = {}
     template = 'flights/airport_form.html'
     return render(request, template, context)
