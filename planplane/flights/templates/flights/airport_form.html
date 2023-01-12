@@ -10,14 +10,12 @@
             <tr class="">
                 <th class="">Airport Code</th>
                 <th class="">Airport Name</th>
-                <th class="">Coordinates</th>
                 <th class="">Timezone</th>
             </tr>
             {% for city in AirportsData %}
             <tr class="">
                 <th class="">{{ city.airport_code }}</th>
                 <th class="">{{ city.airport_name.en }}</th>
-                <th class="">{{ city.coordinates }}</th>
                 <th class="">{{ city.timezone }}</th>
             </tr> 
             {% endfor%}
