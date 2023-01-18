@@ -23,5 +23,5 @@ def airports_of_city(request):
     return render(request, template, context)
 
 def ticket_search(request):
-    template = 'flights/base.html'
+    template = 'flights/ticket.html'
     return render(request, template)

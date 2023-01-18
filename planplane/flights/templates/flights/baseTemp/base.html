@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block title %}
+      <title>Base page</title>
+    {% endblock %}
+    <link href="../../static/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main">
+      {% block header%}
+        {% include "./header_temp.html"%}
+      {% endblock %}
+      {% block menu %}
+        {% include "./menu_temp.html" %}
+      {% endblock %}
+      <div class="frame">
+        {% block content %}
+        {% endblock %}
+      </div>
+      {% block footer %}
+        {% include "./footer_temp.html"%}
+      {% endblock %}
+    </div>
+  </body>
+</html>
