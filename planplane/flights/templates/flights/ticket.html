@@ -1,11 +1,12 @@
 {% extends "./baseTemp/base.html" %}
 {% block title %}
-<title>Поиск билетов</title>
+    Поиск билетов
 {% endblock %}
 {% block content %}
 <div class="tabletick">
     <div class="searchdiv">
       <form class="searchform" method="POST">
+        {% csrf_token %}
         <div class="city">
             <label for="city_departure">Город отправления <img src="../../static/images/airplaneDeparture.png" class="iconPlane"> :</label>
             <input type="text" id="city_departure" class="textcity" list="city">
