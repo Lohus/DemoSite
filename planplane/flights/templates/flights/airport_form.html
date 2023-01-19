@@ -2,7 +2,7 @@
     {% csrf_token %}
     <fieldset>
         <legend><h1>Аэропорты города</h1></legend>
-            <input type="text" name="namecity">
+            <input type="text" name="namecity" placeholder="Name of city">
     </fieldset>
     <input type="submit" value="Search">
     {% if AirportsData %}

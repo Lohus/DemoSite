@@ -2,26 +2,13 @@
 {% block content %}
 <div class="tabletick">
     <div class="searchdiv">
-      <form class="searchform" method="POST">
+      <form class="searchTicket" method="POST" action="{% url 'flights:ticket' %}">
         {% csrf_token %}
-        <div class="city">
-            <label for="city_departure">Город отправления <img src="../../static/images/airplaneDeparture.png" class="iconPlane"> :</label>
-            <input type="text" id="city_departure" class="textcity" list="city">
-            <label for="city_arrived">Город прибытия <img src="../../static/images/airplaneArrived.png" class="iconPlane"> :</label>
-            <input type="text" id="city_arrived" class="textcity" list="city">
-        </div>
-        <div class="typedate">
-          <div class="checkbox">
-            <p class="checkdatetext"><input class="checkdate" type="radio" name="date" value="departure" checked>Дата отправления</p>
-            <p class="checkdatetext"><input class="checkdate" type="radio" name="date" value="arrival">Дата прибытия</p>
-          </div>
-          <div class="dateselect">
-            <input id="inputDate" class="inputdate" type="date">
-          </div>
-        </div>
-        <div class="searchbutton">
-            <input class="submit" type="submit" value="Поиск">
-        </div>
+        <input class="nameCity departure" type="text" name="cityDeparture" placeholder="Город отправления">
+        <img class="iconPlane" src="../../static/images/arrivedToDepartureSmall.png">
+        <input class="nameCity arrived" type="text" name="cityArrived"  placeholder="Город прибытия">
+        <input class="dateDeparture" type="date" name="dateDeparture">
+        <input class="submitTicket" type="submit" value="Поиск">
       </form>
     </div>
     <div class="tableover">
