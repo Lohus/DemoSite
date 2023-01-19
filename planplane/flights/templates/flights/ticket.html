@@ -1,7 +1,4 @@
 {% extends "./baseTemp/base.html" %}
-{% block title %}
-    Поиск билетов
-{% endblock %}
 {% block content %}
 <div class="tabletick">
     <div class="searchdiv">
@@ -12,20 +9,6 @@
             <input type="text" id="city_departure" class="textcity" list="city">
             <label for="city_arrived">Город прибытия <img src="../../static/images/airplaneArrived.png" class="iconPlane"> :</label>
             <input type="text" id="city_arrived" class="textcity" list="city">
-            <datalist id="city">
-              <option>Челябинск</option>
-              <option>Москва</option>
-              <option>Самара</option>
-              <option>Саратов</option>
-              <option>Екатеринбург</option>
-              <option>Еманжелинск</option>
-              <option>Тюмень</option>
-              <option>Тверь</option>
-              <option>Астрахань</option>
-              <option>Архангельск</option>
-              <option>Варна</option>
-              <option>Копейск</option>
-            </datalist>
         </div>
         <div class="typedate">
           <div class="checkbox">
@@ -33,40 +16,7 @@
             <p class="checkdatetext"><input class="checkdate" type="radio" name="date" value="arrival">Дата прибытия</p>
           </div>
           <div class="dateselect">
-            <span>
-            <label for="day">День:</label>
-            <select class="select" id="day" name="day">
-              <option disabled>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option disabled>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-              <option disabled>10</option>
-              <option>11</option>
-              <option>12</option>
-            </select>
-          </span>
-          <span>
-            <label for="month">Месяц:</label>
-            <select class="select" id="month" name="month">
-              <option disabled>Январь</option>
-              <option>Февраль</option>
-              <option>Март</option>
-              <option>Апрель</option>
-              <option>Май</option>
-              <option disabled>Июнь</option>
-              <option>Июль</option>
-              <option>Август</option>
-              <option>Сентябрь</option>
-              <option disabled>Октябрь</option>
-              <option>Ноябрь</option>
-              <option>Декабрь</option>
-            </select>
-          </span>
+            <input id="inputDate" class="inputdate" type="date">
           </div>
         </div>
         <div class="searchbutton">

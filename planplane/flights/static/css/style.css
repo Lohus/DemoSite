@@ -1,3 +1,4 @@
+/* basic style */
 * {
     margin:0;
     padding:0;
@@ -26,6 +27,8 @@ a {
     margin: auto;
     box-shadow: 0 0 15px #000000;
 }
+
+/* Header */
 .header {
     display: flex;
     flex-direction: row;
@@ -39,6 +42,8 @@ a {
 .img{
     width:50%;
 }
+
+/* Menu */
 .menu {
     display:flex;
     flex-direction: row;
@@ -62,6 +67,8 @@ a {
     border-right: 2px solid var(--color-border);
 }
 
+
+/* Content */
 .frame {
     --image-height: 733px; 
     border: 2px solid var(--color-border);
@@ -119,9 +126,11 @@ a {
 
 .dateselect {
     display: flex;
-    flex-direction: column;
-    padding-left: 10px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px; 
 }
+
 
 .select {
     background-color: var(--color-text);
@@ -214,6 +223,8 @@ label {
     border-left: 2px solid var(--color-border);
 }
 
+
+/* Footer */
 .footer {
     border: 2px solid var(--color-border);
     border-top: none;
