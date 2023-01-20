@@ -15,6 +15,10 @@
     box-sizing: border-box;
 }
 
+.baseBorder {
+    border: 2px solid var(--color-border);
+}
+
 body {
     background-color:var(--color-body);
 }
@@ -92,6 +96,7 @@ a {
     flex-flow: column;
 }
 
+/* Form */
 .searchdiv{
     background-color: var(--color-base);
     border-bottom:2px solid var(--color-border);
@@ -120,10 +125,9 @@ a {
     background-color: hsl(var(--hsl-h),var(--hsl-s),calc(var(--hsl-l) + 40%));;
 }
 
-
-
 .iconPlane {
     width:100%;
+    max-width: 32px;
     grid-column-start: 2;
     align-self: center;
     justify-self: center;
@@ -156,44 +160,60 @@ a {
     padding-left: 5px;
     border-style:solid;
 }
+/* End Form */
 
-
-
+/* Flight Information */
 .tableover {
     max-height: 100%;
     overflow: auto;
-}
-.tbfly {
-    width: 80%;
-    margin:20px auto;
-    border-spacing: 0 5px;
-}
-.trfly:not(:first-child):hover {
-    background-color: hsla(var(--hsl-h),var(--hsl-s),calc(var(--hsl-l) + 70%), 1);
-    transform: scale(1.01, 1.2);
+    padding:10px;
 }
 
-.thfly {
-    background-color: var(--color-base);
-    border: 2px solid var(--color-border);
-    border-left: 0;
-}
-.tdfly {
-    border: 2px solid var(--color-border);
+.infFlight {
+    width: 100%;
+    margin:auto;
     background-color: hsla(var(--hsl-h),var(--hsl-s),calc(var(--hsl-l) + 57%), 0.8);
-    text-align: center;
-    border-left: 0;
-    color: var(--color-base);
-    vertical-align: middle;
+    border-radius: 10px;
 }
-.tdfly:last-child {
-    text-align: right;
-    padding-right: 3px;
+.infFlight:hover{
+    border-color: white;
+    background-color: hsla(var(--hsl-h),var(--hsl-s),calc(var(--hsl-l) + 57%), 1);
+}
+.infFlight:not(:first-child) {
+    margin-top: 10px;
 }
 
-.borderleft:first-child{
-    border-left: 2px solid var(--color-border);
+.infFlight p {
+    color:var(--color-base);
 }
+
+.flight {
+    padding:10px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    width:100%;
+}
+.point{
+    width:35%;
+}
+.timeAndIcon{
+    width:5%;
+}
+.costAndPlace {
+    width:25%;
+}
+.center{
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* End Flight Information */
+/* End Content */
+
 
 
 /* Footer */
