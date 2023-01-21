@@ -4,10 +4,10 @@
     <div class="searchdiv">
       <form class="searchTicket" method="POST" action="{% url 'flights:ticket' %}">
         {% csrf_token %}
-        <input class="nameCity departure" type="text" name="cityDeparture" placeholder="Город отправления" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
+        <input class="nameCity departure" type="text" name="cityDeparture" placeholder="{% if initialData.cityArrived %}{{initialData.cityArrived}}{% else %}{{ 'Город отправления' }}{% endif %}" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
         <img class="iconPlane" src="../../static/images/arrivedToDepartureSmall.png">
-        <input class="nameCity arrived" type="text" name="cityArrived"  placeholder="Город прибытия" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
-        <input class="dateDeparture" type="date" name="dateDeparture" value="" required>
+        <input class="nameCity arrived" type="text" name="cityArrived"  placeholder="{% if initialData.cityArrived %}{{initialData.cityArrived}}{% else %}{{ 'Город прибытия' }}{% endif %}" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
+        <input class="dateDeparture" type="date" name="dateDeparture" value="{% if initialData.valueDate %}{{initialData.valueDate}}{% else %}{{ initialData.minDate }}{% endif %}" required min="{{ initialData.minDate }}">
         <input class="submitTicket" type="submit" value="Поиск">
       </form>
     </div>

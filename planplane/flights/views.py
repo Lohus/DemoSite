@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import *
+from .localfunc import *
 
 def index(request):
     temp = AircraftsData.objects.values('aircraft_code', 'model')
@@ -24,7 +25,13 @@ def airports_of_city(request):
 
 def ticket_search(request):
     template = 'flights/ticket.html'
-    context = {'title': 'Покупка билетов'}
+    initialData = {'cityArrived': '', 'cityDeparture': '', 'minDate': getStringDay() , 'valueDate': ''}
+    context = {'title': 'Покупка билетов', 'initialData': initialData, 'tableFlights': ''}
+    if request.POST:
+        initialData['cityDeparture'] = request.POST['cityDeparture']
+        initialData['cityArrived'] = request.POST['cityArrived']
+        initialData['valueDate'] = request.POST['dateDeparture']
+    
     return render(request, template, context)
 
 def main_page(request):
