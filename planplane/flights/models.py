@@ -24,6 +24,9 @@ class AirportsData(models.Model):
     class Meta:
         managed = False
         db_table = 'airports_data'
+    
+    def __str__(self):
+        return self.airport_code
 
 
 class AuthGroup(models.Model):

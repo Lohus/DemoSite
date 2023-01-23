@@ -4,378 +4,51 @@
     <div class="searchdiv">
       <form class="searchTicket" method="POST" action="{% url 'flights:ticket' %}">
         {% csrf_token %}
-        <input class="nameCity departure" type="text" name="cityDeparture" placeholder="{% if initialData.cityArrived %}{{initialData.cityArrived}}{% else %}{{ 'Город отправления' }}{% endif %}" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
+        <input class="nameCity departure" type="text" name="cityDeparture" placeholder="{% if initialData.cityDeparture %}{{initialData.cityDeparture}}{% else %}{{ 'Город отправления' }}{% endif %}" pattern="[A-Za-zА-Яа-яЁё]+[\s\-]?[A-Za-zА-Яа-яЁё]+[\s\-]?[A-Za-zА-Яа-яЁё]+" required>
         <img class="iconPlane" src="../../static/images/arrivedToDepartureSmall.png">
-        <input class="nameCity arrived" type="text" name="cityArrived"  placeholder="{% if initialData.cityArrived %}{{initialData.cityArrived}}{% else %}{{ 'Город прибытия' }}{% endif %}" pattern="[A-Za-z]+[\s\-]?[A-Za-z]+[\s\-]?[A-Za-z]+" required>
-        <input class="dateDeparture" type="date" name="dateDeparture" value="{% if initialData.valueDate %}{{initialData.valueDate}}{% else %}{{ initialData.minDate }}{% endif %}" required min="{{ initialData.minDate }}">
+        <input class="nameCity arrived" type="text" name="cityArrived"  placeholder="{% if initialData.cityArrived %}{{initialData.cityArrived}}{% else %}{{ 'Город прибытия' }}{% endif %}" pattern="[A-Za-zА-Яа-яЁё]+[\s\-]?[A-Za-zА-Яа-яЁё]+[\s\-]?[A-Za-zА-Яа-яЁё]+" required>
+        <!-- <input class="dateDeparture" type="date" name="dateDeparture" value="{% if initialData.valueDate %}{{initialData.valueDate}}{% else %}{{ initialData.minDate }}{% endif %}" required min="{{ initialData.minDate }}">  вернуть после добавления записей в базу на акутальные даты-->
+        <input class="dateDeparture" type="date" name="dateDeparture" value="{% if initialData.valueDate %}{{initialData.valueDate}}{% else %}{{ initialData.minDate }}{% endif %}" required min="">
         <input class="submitTicket" type="submit" value="Поиск">
       </form>
     </div>
     <div class="tableover">
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
+        {% if tableFlights %}
+            {% for everyFlight in tableFlights %}
+                <div class="infFlight baseBorder">
+                    <div class="flight">
+                        <div class="point center">
+                            <p>{{ everyFlight.scheduled_departure | time:" H:i" }}</p>
+                            <p>{{ everyFlight.scheduled_departure | date:"d.m" }}</p>
+                            <p>{{ initialData.cityDeparture }}</p>
+                            <p>{{ everyFlight.departure_airport }}</p>
+                        </div>
+                        <div class="timeAndIcon center">
+                            <p>02:40</p>
+                            <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
+                        </div>
+                        <div class="point center">
+                            <p>{{ everyFlight.scheduled_arrival | time:" H:i" }}</p>
+                            <p>{{ everyFlight.scheduled_arrival | date:"d.m" }}</p>
+                            <p>{{ initialData.cityArrived }}</p>
+                            <p>{{ everyFlight.arrival_airport }}</p>
+                        </div>
+                        <div class="costAndPlace center">
+                            <p>Эконом: 56</p>
+                            <p>Бизнес: 19</p>
+                            <p>Цена: 6500 р.</p>
+                            <button>Купить</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
+            {% endfor %}
+        {% else %}
+            <div class="infFlight baseBorder">
+                <div class="flight center message">
+                    <p>Введите название города вылета и города прилёта</p>
                 </div>
             </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
-        <div class="infFlight baseBorder">
-            <div class="flight">
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>19:40</p>
-                    <p>Челябинск</p>
-                    <p>CEK</p>
-                </div>
-                <div class="timeAndIcon center">
-                    <p>02:40</p>
-                    <img class="iconPlane" src="../../static/images/arrivedToDepartureBaseSmall.png">
-                </div>
-                <div class="point center">
-                    <p>23.01</p>
-                    <p>21:40</p>
-                    <p>Москва</p>
-                    <p>SVO</p>
-                </div>
-                <div class="costAndPlace center">
-                    <p>Эконом: 56</p>
-                    <p>Бизнес: 19</p>
-                    <p>Цена: 6500 р.</p>
-                    <button>Купить</button>
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

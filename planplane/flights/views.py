@@ -26,12 +26,15 @@ def airports_of_city(request):
 def ticket_search(request):
     template = 'flights/ticket.html'
     initialData = {'cityArrived': '', 'cityDeparture': '', 'minDate': getStringDay() , 'valueDate': ''}
-    context = {'title': 'Покупка билетов', 'initialData': initialData, 'tableFlights': ''}
+    context = {'title': 'Покупка билетов', 'initialData': initialData,}
     if request.POST:
         initialData['cityDeparture'] = request.POST['cityDeparture']
         initialData['cityArrived'] = request.POST['cityArrived']
         initialData['valueDate'] = request.POST['dateDeparture']
-    
+        airportsOfDeparture = AirportsData.objects.filter(city__ru=request.POST['cityDeparture'])
+        airportsOfArrived = AirportsData.objects.filter(city__ru=request.POST['cityArrived'])
+        context['tableFlights'] = Flights.objects.filter(scheduled_departure__date=request.POST['dateDeparture']).filter(departure_airport__in=airportsOfDeparture).filter(arrival_airport__in=airportsOfArrived)
+    print(context)
     return render(request, template, context)
 
 def main_page(request):

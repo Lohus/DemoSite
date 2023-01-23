@@ -211,6 +211,9 @@ a {
     flex-direction: column;
 }
 
+.message {
+    height: 93px;
+}
 /* End Flight Information */
 /* End Content */
 
