@@ -26,6 +26,16 @@ body {
 a {
     text-decoration: none;
 }
+
+.indev > a {
+    background-image: url("../../static/images/metalplate128x55.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    padding: 2px;
+    color: var(--color-base);
+}
 .main {
     width: 1100px;
     background-color:var(--color-base);
@@ -34,19 +44,23 @@ a {
 }
 
 .indev {
-    /* background-image: url("../../static/images/underconstrsmall2.jpg"); */
-    background: radial-gradient(#ffffff00, #000000c7), url("../../static/images/underconstrsmall2.jpg") -50px;
-    /* background-position: -50px; */
-    background-repeat: no-repeat;
+    background: radial-gradient(#ffffff00, #000000e1), url("../../static/images/64x64noise.png") -64px;
     animation-name: movedev;
-    animation-duration: 1.5s;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+}
+.indev:nth-of-type(3) {
+    background: radial-gradient(#ffffff00, #000000e1), url("../../static/images/64x64noise180.png") -64px;
 }
 
 @keyframes movedev {
     to {background-position: 0px;}
 }
+@keyframes movedev2 {
+    to {background-position: 34px;}
+}
+
 
 /* Header */
 .header {
@@ -74,7 +88,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    width: 100%;
     height: 30px;
     list-style-type: none;
     text-align: center;

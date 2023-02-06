@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os.path
+from .data import *
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,11 +80,7 @@ WSGI_APPLICATION = 'planplane.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'demo',
-        'USER': 'djangouser',
-        'PASSWORD': 'djangopass',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        **dbdata
     }
 }
 

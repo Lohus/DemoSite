@@ -9,7 +9,6 @@ def index(request):
     context = { 'temp': temp}
     template = 'flights/index.html'
     return render(request, template, context)
-    # return HttpResponse(template.render(context, request))
 
 def model_aircrafts(request, code_model):
     return HttpResponse("Aircrafts code: %s." % code_model)
