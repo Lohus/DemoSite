@@ -1,0 +1,1 @@
+Небольшое веб-приложение, взаимодействующее с демонстрационной базой данных [PostgresSQL](https://postgrespro.ru/education/demodb)
